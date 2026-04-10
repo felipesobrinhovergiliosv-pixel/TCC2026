@@ -41,7 +41,18 @@ public class Post {
     @NotNull
     private LocalDate data_publicação;
 
-    //categoriaid
-    //userid
-    //midiaid
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private CategoriaForum categoriaForum;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "midia_id")
+    private Midia midia;
 }
