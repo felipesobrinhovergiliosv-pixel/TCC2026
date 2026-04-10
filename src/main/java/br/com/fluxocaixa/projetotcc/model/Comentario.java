@@ -43,9 +43,13 @@ public class Comentario {
     @JoinColumn(name = "midia_id")
     private Midia midia;
 
+
     @PositiveOrZero
     private Long upvotes;
 
     @Column(name = "data_publicacao")
     private Date dataPublicacao;
+
 }
+
+
