@@ -26,7 +26,7 @@ CREATE TABLE midia (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(255) NOT NULL,
   midia_url VARCHAR(500),
-  tipo_midia ENUM('VIDEO', 'IMAGEM', 'AUDIO', 'NENHUM')
+  tipo_midia varchar(20)
 );
 
 -- CATEGORIA FORUM
