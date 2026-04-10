@@ -24,17 +24,17 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank  // nao pode ser nulo (string)
+    @NotBlank
     private String titulo;
 
-    @NotBlank  // nao pode ser nulo (string)
+    @NotBlank
     private String conteudo_texto;
 
-    @NotBlank  // nao pode ser nulo (string)
+    @NotBlank
     private String midia_url;
 
-    @PositiveOrZero //preco não pode ser negativo
-    @NotNull // nao pode ser nulo
+    @PositiveOrZero
+    @NotNull
     //likes no post
     private Integer upvotes;
 
