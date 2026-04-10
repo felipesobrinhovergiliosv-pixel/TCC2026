@@ -1,7 +1,6 @@
 package br.com.fluxocaixa.projetotcc.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -19,8 +18,10 @@ public class Comentario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // fazer dps
-    // private Post post;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     @NotNull
     @ManyToOne
@@ -35,8 +36,10 @@ public class Comentario {
     @Column(name = "conteudo_texto")
     private String conteudoTexto;
 
-    // fazer dps
-    // private Midia midia
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "midia_id")
+    private Midia midia;
 
 
     @PositiveOrZero
@@ -44,4 +47,7 @@ public class Comentario {
 
     @Column(name = "data_publicacao")
     private Date dataPublicacao;
+
 }
+
+

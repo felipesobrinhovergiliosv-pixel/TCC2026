@@ -36,3 +36,4 @@ public class User {
     @Column(name = "data_criacao")
     private Date dataCriacao;
 }
+
