@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "progressousuario")
-public class ProressoUsuario {
+public class ProgressoUsuario {
 
     @NotNull
     private Boolean concluido;
