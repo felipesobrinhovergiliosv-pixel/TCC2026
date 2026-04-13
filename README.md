@@ -1,7 +1,7 @@
 
 
 <div align="center">
-  <img src="src/main/resources/Site/imgs/MEI track + MEIZINHO.jpeg" alt="Logo MEI track" width="400">
+  <img src="src/main/resources/Site/imgs/MEItrack + MEIZINHO sem bg.png" alt="Logo MEI track" width="400">
   
   # 🚀 MEI track: Plataforma de Aprendizado de Gestão
   **Sua plataforma definitiva de ensino e comunidade para Microempreendedores.**
