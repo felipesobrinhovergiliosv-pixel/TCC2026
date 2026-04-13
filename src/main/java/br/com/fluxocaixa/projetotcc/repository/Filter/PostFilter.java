@@ -1,5 +1,6 @@
 package br.com.fluxocaixa.projetotcc.repository.Filter;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,5 +9,7 @@ import java.util.Date;
 public class PostFilter {
     private String titulo;
     private Long upvotes;
+
+    @Column(name = "data_publicacao")
     private Date dataPublicacao;
 }
