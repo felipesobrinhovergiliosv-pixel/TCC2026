@@ -16,7 +16,7 @@ public class CategoriaForumService {
     @Transactional
     public CategoriaForum salvar(CategoriaForum categoriaForum) { return categoriaForumRepository.save(categoriaForum); }
 
-    public CategoriaForum BouF(Long categoriaId){
+    public CategoriaForum buscaroufalhar(Long categoriaId){
         return categoriaForumRepository.findById(categoriaId)
                 .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrado com esse id"));
     }
