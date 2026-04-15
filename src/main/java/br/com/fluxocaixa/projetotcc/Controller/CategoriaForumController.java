@@ -19,41 +19,41 @@ import java.util.List;
 public class CategoriaForumController {
 
     @Autowired
-    private CategoriaForumRepository categoriaForumRepository;
+    private CategoriaForumRepository repository;
 
     @Autowired
-    private CategoriaForumRepositoryImpl categoriaForumRepositoryimpl;
+    private CategoriaForumRepositoryImpl repositoryimpl;
 
     @Autowired
-    private CategoriaForumService categoriaForumService;
+    private CategoriaForumService service;
 
     @GetMapping
     public List<CategoriaForum> listar() {
-        return categoriaForumRepository.findAll();
+        return repository.findAll();
     }
 
     @GetMapping("/pornome")
     public Page<CategoriaForumDto> listarPorNome(CategoriaForumFilter categoriaForumFilter, Pageable pageable){
-        return categoriaForumRepositoryimpl.filtrar(categoriaForumFilter, pageable);
+        return repositoryimpl.filtrar(categoriaForumFilter, pageable);
     }
 
     @GetMapping("/{categoriaForumId}")
     public CategoriaForum buscar(@PathVariable Long categoriaForumId ){
-        return categoriaForumService.buscaroufalhar(categoriaForumId);
+        return service.buscaroufalhar(categoriaForumId);
     }
 
     @PostMapping
-    public CategoriaForum adicionar(@RequestBody CategoriaForum categoriaForum) { return categoriaForumService.salvar(categoriaForum); }
+    public CategoriaForum adicionar(@RequestBody CategoriaForum categoriaForum) { return service.salvar(categoriaForum); }
 
     @DeleteMapping("/{categoriaForumId}")
-    public void remover(@PathVariable Long categoriaForumId){ categoriaForumService.excluir(categoriaForumId);}
+    public void remover(@PathVariable Long categoriaForumId){ service.excluir(categoriaForumId);}
 
     @PutMapping("/{categoriaForumId}")
     public CategoriaForum alterar(@PathVariable Long categoriaForumId, @RequestBody CategoriaForum categoriaForum){
-        CategoriaForum categoriaForumAtual = categoriaForumService.buscaroufalhar(categoriaForumId);
+        CategoriaForum categoriaForumAtual = service.buscaroufalhar(categoriaForumId);
 
         BeanUtils.copyProperties(categoriaForum, categoriaForumAtual, "id");
-        return categoriaForumService.salvar(categoriaForumAtual);
+        return service.salvar(categoriaForumAtual);
     }
 
 }
