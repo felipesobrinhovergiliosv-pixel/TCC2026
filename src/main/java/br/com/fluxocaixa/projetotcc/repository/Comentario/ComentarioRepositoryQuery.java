@@ -1,4 +1,4 @@
 package br.com.fluxocaixa.projetotcc.repository.Comentario;
 
-public interface ComentarioQuery {
+public interface ComentarioRepositoryQuery {
 }

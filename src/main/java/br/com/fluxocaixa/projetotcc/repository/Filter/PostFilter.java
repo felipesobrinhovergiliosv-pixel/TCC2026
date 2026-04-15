@@ -8,6 +8,7 @@ import java.util.Date;
 @Data
 public class PostFilter {
     private String titulo;
+
     private Long upvotes;
 
     @Column(name = "data_publicacao")

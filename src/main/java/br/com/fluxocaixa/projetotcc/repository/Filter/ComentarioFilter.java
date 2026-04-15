@@ -13,5 +13,6 @@ public class ComentarioFilter {
 
     @Column(name = "data_publicacao")
     private Date dataPublicacao;
+
     private Long upvotes;
 }

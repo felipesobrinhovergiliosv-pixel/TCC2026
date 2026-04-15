@@ -1,4 +1,4 @@
 package br.com.fluxocaixa.projetotcc.repository.User;
 
-public interface UserQuery {
+public interface UserRepositoryQuery {
 }
