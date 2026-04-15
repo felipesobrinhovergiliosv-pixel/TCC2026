@@ -1,8 +1,8 @@
-package br.com.fluxocaixa.projetotcc.repository.CategoriaForum;
+package br.com.fluxocaixa.projetotcc.repository.Comentario;
 
-import br.com.fluxocaixa.projetotcc.dto.CategoriaForumDto;
-import br.com.fluxocaixa.projetotcc.model.CategoriaForum;
-import br.com.fluxocaixa.projetotcc.repository.Filter.CategoriaForumFilter;
+import br.com.fluxocaixa.projetotcc.dto.ComentarioDto;
+import br.com.fluxocaixa.projetotcc.model.Comentario;
+import br.com.fluxocaixa.projetotcc.repository.Filter.ComentarioFilter;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -17,39 +17,41 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQuery {
+public class ComentarioRepositoryImpl implements ComentarioRepositoryQuery{
 
     @PersistenceContext
     private EntityManager manager;
 
     @Override
-    public PageImpl<CategoriaForumDto> filtrar(CategoriaForumFilter filter, Pageable pageable) {
+    public PageImpl<ComentarioDto> filtar(ComentarioFilter filter, Pageable pageable) {
 
         CriteriaBuilder builder= manager.getCriteriaBuilder();
 
-        CriteriaQuery<CategoriaForumDto> criteria = builder.createQuery(CategoriaForumDto.class);
+        CriteriaQuery<ComentarioDto> criteria = builder.createQuery(ComentarioDto.class);
 
-        Root<CategoriaForum> root = criteria.from(CategoriaForum.class);
+        Root<Comentario> root = criteria.from(Comentario.class);
 
-        criteria.select(builder.construct(CategoriaForumDto.class,
+        criteria.select(builder.construct(ComentarioDto.class,
                 root.get("id"),
-                root.get("nome")
+                root.get("conteudoTexto"),
+                root.get("dataPublicação"),
+                root.get("upvotes")
         ));
 
         Predicate[] predicates = criarRest(filter, builder, root);
         criteria.where(predicates);
         criteria.orderBy(builder.asc(root.get("nomeCliente")));
 
-        TypedQuery<CategoriaForumDto> query = manager.createQuery(criteria);
+        TypedQuery<ComentarioDto> query = manager.createQuery(criteria);
         addRestPag(query,pageable);
 
         return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
 
-    private long total(CategoriaForumFilter filter) {
+    private long total(ComentarioFilter filter) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
-        Root<CategoriaForum> root = criteria.from(CategoriaForum.class);
+        Root<Comentario> root = criteria.from(Comentario.class);
 
         Predicate[] predicates = criarRest(filter, builder, root);
         criteria.where(predicates);
@@ -59,7 +61,7 @@ public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQue
         return manager.createQuery(criteria).getSingleResult();
     }
 
-    private void addRestPag(TypedQuery<CategoriaForumDto> query, Pageable pageable) {
+    private void addRestPag(TypedQuery<ComentarioDto> query, Pageable pageable) {
         int pagAtual = pageable.getPageNumber();
         int totalRegPorPag = pageable.getPageSize();
         int primRegPag = pagAtual * totalRegPorPag;
@@ -68,12 +70,18 @@ public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQue
         query.setMaxResults(totalRegPorPag);
     }
 
-    private Predicate[] criarRest(CategoriaForumFilter filter, CriteriaBuilder builder, Root<CategoriaForum> root) {
+    private Predicate[] criarRest(ComentarioFilter filter, CriteriaBuilder builder, Root<Comentario> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getNome())){
-            predicates.add(builder.like(root.get("nomeCliente"), "%" + filter.getNome() + "%"));
+        if (StringUtils.hasText(filter.getConteudoTexto())){
+            predicates.add(builder.like(root.get("conteudo_texto"), "%" + filter.getConteudoTexto() + "%"));
         }
+        if (filter.getDataPublicacao() != null) {
+            predicates.add(builder.equal(root.get("dataPublicacao"), filter.getDataPublicacao()));
+        }
+        if (filter.getUpvotes() != null) {
+        predicates.add(builder.equal(root.get("dataUpvotes"), filter.getUpvotes()));
+    }
 
         return predicates.toArray(new Predicate[predicates.size()]);
     }
