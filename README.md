@@ -11,14 +11,14 @@
 
 ## 💡 O que é o MEI track?
 
-[cite_start]O **MEI track** é um sistema educacional em formato de site, desenvolvido com foco total na gestão de Microempreendedores Individuais (MEIs)[cite: 11]. [cite_start]Nosso maior objetivo é promover o ensino e a transferência de conhecimento de forma acessível e direta[cite: 10].
+O **MEI track** é um sistema educacional em formato de site, desenvolvido com foco total na gestão de Microempreendedores Individuais (MEIs). Nosso maior objetivo é promover o ensino e a transferência de conhecimento de forma acessível e direta.
 
-[cite_start]Sabemos que empreender pode gerar muitas dúvidas, por isso criamos uma plataforma digital de aprendizagem [cite: 11] unida a um **fórum interativo** poderoso. [cite_start]Nele, os usuários podem esclarecer dúvidas, trocar experiências reais e compartilhar conhecimentos essenciais para o dia a dia[cite: 12].
+Sabemos que empreender pode gerar muitas dúvidas, por isso criamos uma plataforma digital de aprendizagem unida a um **fórum interativo** poderoso. Nele, os usuários podem esclarecer dúvidas, trocar experiências reais e compartilhar conhecimentos essenciais para o dia a dia.
 
 ### ✨ O que você encontra por aqui:
 
-* [cite_start]**Trilhas de Aprendizado:** Conteúdos focados no desenvolvimento e na gestão do MEI[cite: 11, 14].
-* **Comunidade Interativa:** Um fórum dedicado para você nunca empreender sozinho. [cite_start]Conecte-se, faça perguntas e compartilhe suas vitórias com quem entende do assunto[cite: 12, 15].
+* **Trilhas de Aprendizado:** Conteúdos focados no desenvolvimento e na gestão do MEI.
+* **Comunidade Interativa:** Um fórum dedicado para você nunca empreender sozinho. Conecte-se, faça perguntas e compartilhe suas vitórias com quem entende do assunto.
 
 ---
 
@@ -36,22 +36,22 @@ Esse é o nosso mascote, o **MEIzinho**! Ele está aqui para acompanhar você em
 
 ## 🎓 Sobre o Projeto (TCC)
 
-[cite_start]Este repositório contém o projeto de Trabalho de Conclusão de Curso (TCC) do Ensino Médio Integrado ao **Técnico em Desenvolvimento de Sistemas**[cite: 1, 2]. [cite_start]O trabalho foi desenvolvido e apresentado na **Etec Cidade do Livro**, em Lençóis Paulista - SP, no ano de 2026[cite: 1].
+Este repositório contém o projeto de Trabalho de Conclusão de Curso (TCC) do Ensino Médio Integrado ao **Técnico em Desenvolvimento de Sistemas**. O trabalho foi desenvolvido e apresentado na **Etec Cidade do Livro**, em Lençóis Paulista - SP, no ano de 2026.
 
 ### 👨‍💻 Desenvolvedores:
-* [cite_start]**Enzo Canale Guerato** [cite: 1] - [Seu LinkedIn/GitHub]
-* [cite_start]**Felipe Sobrinho Vergilio** [cite: 1] - [Seu LinkedIn/GitHub]
-* [cite_start]**Miguel Pelegrin dos Santos** [cite: 1] - [Seu LinkedIn/GitHub]
+* [**Enzo Canale Guerato**](https://github.com/EnzoGuerato)
+* [**Felipe Sobrinho Vergilio**](https://github.com/felipesobrinhovergiliosv-pixel)
+* [**Miguel Pelegrin dos Santos**](https://github.com/MiguelPelegrin)
 
 ### 🤝 Agradecimentos Especiais:
-[cite_start]Dedicamos este projeto e deixamos nosso muito obrigado aos professores que foram fundamentais na realização deste trabalho[cite: 3, 4]:
-* **Prof. Esp. [cite_start]Rogério Luna Furlan:** Pelo apoio essencial no desenvolvimento da nossa plataforma de aprendizado[cite: 5].
-* **Prof. Esp. [cite_start]Sidney Joaquim Vieira:** Pelas orientações precisas na documentação e formatação do projeto[cite: 6].
-* **Prof. Esp. [cite_start]Ronaldo Moreno:** Por nos auxiliar na idealização e estruturação da ideia central do sistema[cite: 7].
+Dedicamos este projeto e deixamos nosso muito obrigado aos professores que foram fundamentais na realização deste trabalho:
+* **Prof. Esp. Rogério Luna Furlan:** Pelo apoio essencial no desenvolvimento da nossa plataforma de aprendizado.
+* **Prof. Esp. Sidney Joaquim Vieira:** Pelas orientações precisas na documentação e formatação do projeto.
+* **Prof. Esp. Ronaldo Moreno:** Por nos auxiliar na idealização e estruturação da ideia central do sistema.
 
 ---
 <div align="center">
-  [cite_start]<i>"Eu acredito que às vezes são as pessoas que ninguém espera nada que fazem as coisas que ninguém consegue imaginar."</i> [cite: 8]
+  <i>"Eu acredito que às vezes são as pessoas que ninguém espera nada que fazem as coisas que ninguém consegue imaginar."</i>
   <br><br>
   Feito com 🧡 para fortalecer o empreendedor brasileiro.
 </div>
