@@ -6,5 +6,5 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public interface ProgressoUsuarioRepositoryQuery {
-    public PageImpl<ProgressoUsuarioDto> filtrar(ProgressoUsuarioFilter progressoUsuarioFilter, Pageable pageable);
+    public PageImpl<ProgressoUsuarioDto> filtrar(ProgressoUsuarioFilter filter, Pageable pageable);
 }

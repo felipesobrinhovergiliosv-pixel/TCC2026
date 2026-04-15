@@ -6,5 +6,5 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public interface PostRepositoryQuery {
-    public PageImpl<PostDto> filtrar(PostFilter postFilter, Pageable pageable);
+    public PageImpl<PostDto> filtrar(PostFilter filter, Pageable pageable);
 }

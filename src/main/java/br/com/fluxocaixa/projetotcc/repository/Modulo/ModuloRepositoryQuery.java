@@ -6,5 +6,5 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public interface ModuloRepositoryQuery {
-    public PageImpl<ModuloDto> filtrar(ModuloFilter moduloFilter, Pageable pageable);
+    public PageImpl<ModuloDto> filtrar(ModuloFilter filter, Pageable pageable);
 }

@@ -6,5 +6,5 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public interface LicaoRepositoryQuery {
-    public PageImpl<LicaoDto> filtrar(LicaoFilter licaoFilter, Pageable pageable);
+    public PageImpl<LicaoDto> filtrar(LicaoFilter filter, Pageable pageable);
 }

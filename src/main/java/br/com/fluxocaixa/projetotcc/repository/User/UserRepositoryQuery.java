@@ -6,5 +6,5 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public interface UserRepositoryQuery {
-    public PageImpl<UserDto> filtrar(UserFilter userFilter, Pageable pageable);
+    public PageImpl<UserDto> filtrar(UserFilter filter, Pageable pageable);
 }
