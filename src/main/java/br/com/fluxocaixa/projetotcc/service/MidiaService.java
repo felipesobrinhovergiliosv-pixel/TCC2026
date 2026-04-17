@@ -16,7 +16,7 @@ public class MidiaService {
     @Transactional
     public Midia salvar(Midia midia){ return midiaRepository.save(midia); }
 
-    public Midia BouF(Long midiaId){
+    public Midia buscaroufalhar(Long midiaId){
         return midiaRepository.findById(midiaId)
                 .orElseThrow(() -> new EntityNotFoundException("Midia não encontrada com esse Id"));
     }

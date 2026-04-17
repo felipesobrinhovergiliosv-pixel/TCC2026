@@ -16,7 +16,7 @@ public class ProgressoUsuarioService {
     @Transactional
     public ProgressoUsuario salvar(ProgressoUsuario progressoUsuario){ return progressoUsuarioRepository.save(progressoUsuario); }
 
-    public ProgressoUsuario BouF(Long progressoId){
+    public ProgressoUsuario buscaroufalhar(Long progressoId){
         return progressoUsuarioRepository.findById(progressoId)
                 .orElseThrow(() -> new EntityNotFoundException("Progresso não encontrado com esse Id"));
     }

@@ -16,7 +16,7 @@ public class UserService {
     @Transactional
     public User salvar(User user){ return userRepository.save(user); }
 
-    public User BouF(Long userId){
+    public User buscaroufalhar(Long userId){
         return userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User não encontrado com esse Id"));
     }

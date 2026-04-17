@@ -16,7 +16,7 @@ public class PostService {
     @Transactional
     public Post salvar(Post post){ return postRepository.save(post); }
 
-    public Post BouF(Long postId){
+    public Post buscaroufalhar(Long postId){
         return postRepository.findById(postId)
                 .orElseThrow(() -> new EntityNotFoundException("Post não encontrado com esse Id"));
     }

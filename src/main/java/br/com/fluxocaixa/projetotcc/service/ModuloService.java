@@ -16,7 +16,7 @@ public class ModuloService {
     @Transactional
     public Modulo salvar(Modulo modulo){ return moduloRepository.save(modulo); }
 
-    public Modulo BouF(Long moduloId){
+    public Modulo buscaroufalhar(Long moduloId){
         return moduloRepository.findById(moduloId)
                 .orElseThrow(() -> new EntityNotFoundException("Modulo não encontrado com esse Id"));
     }
