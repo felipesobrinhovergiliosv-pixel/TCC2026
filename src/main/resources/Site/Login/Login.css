@@ -64,13 +64,28 @@ body.dark {
 }
  /*Parte da caixa de login*/
 
-.box-login{
+ .box-login {
     background-color: red;
     width: 800px;
     height: 500px;
-    margin: auto; 
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
-    align-items: center;
-    border-radius: 20px;
+}
+
+#img-escrito{
+    width: 300px;
+    height: 200px;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-top: -2vw;
+}
+
+.meizinho-joia{
+     
 }
