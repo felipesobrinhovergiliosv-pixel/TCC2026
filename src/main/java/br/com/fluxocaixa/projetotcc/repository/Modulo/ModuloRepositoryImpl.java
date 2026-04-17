@@ -1,8 +1,8 @@
-package br.com.fluxocaixa.projetotcc.repository.CategoriaForum;
+package br.com.fluxocaixa.projetotcc.repository.Modulo;
 
-import br.com.fluxocaixa.projetotcc.dto.CategoriaForumDto;
-import br.com.fluxocaixa.projetotcc.model.CategoriaForum;
-import br.com.fluxocaixa.projetotcc.repository.Filter.CategoriaForumFilter;
+import br.com.fluxocaixa.projetotcc.dto.ModuloDto;
+import br.com.fluxocaixa.projetotcc.model.Modulo;
+import br.com.fluxocaixa.projetotcc.repository.Filter.ModuloFilter;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -17,39 +17,39 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQuery {
-
+public class ModuloRepositoryImpl implements ModuloRepositoryQuery{
     @PersistenceContext
     private EntityManager manager;
 
     @Override
-    public PageImpl<CategoriaForumDto> filtrar(CategoriaForumFilter filter, Pageable pageable) {
+    public PageImpl<ModuloDto> filtrar(ModuloFilter filter, Pageable pageable) {
 
         CriteriaBuilder builder= manager.getCriteriaBuilder();
 
-        CriteriaQuery<CategoriaForumDto> criteria = builder.createQuery(CategoriaForumDto.class);
+        CriteriaQuery<ModuloDto> criteria = builder.createQuery(ModuloDto.class);
 
-        Root<CategoriaForum> root = criteria.from(CategoriaForum.class);
+        Root<Modulo> root = criteria.from(Modulo.class);
 
-        criteria.select(builder.construct(CategoriaForumDto.class,
+        criteria.select(builder.construct(ModuloDto.class,
                 root.get("id"),
-                root.get("nome")
+                root.get("titulo")
         ));
 
         Predicate[] predicates = criarRest(filter, builder, root);
         criteria.where(predicates);
-        criteria.orderBy(builder.asc(root.get("nome")));
+        criteria.orderBy(builder.asc(root.get("titulo")));
 
-        TypedQuery<CategoriaForumDto> query = manager.createQuery(criteria);
+        TypedQuery<ModuloDto> query = manager.createQuery(criteria);
         addRestPag(query,pageable);
 
         return new PageImpl<>(query.getResultList(), pageable, total(filter));
+
     }
 
-    private long total(CategoriaForumFilter filter) {
+    private long total(ModuloFilter filter) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
-        Root<CategoriaForum> root = criteria.from(CategoriaForum.class);
+        Root<Modulo> root = criteria.from(Modulo.class);
 
         Predicate[] predicates = criarRest(filter, builder, root);
         criteria.where(predicates);
@@ -59,7 +59,7 @@ public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQue
         return manager.createQuery(criteria).getSingleResult();
     }
 
-    private void addRestPag(TypedQuery<CategoriaForumDto> query, Pageable pageable) {
+    private void addRestPag(TypedQuery<ModuloDto> query, Pageable pageable) {
         int pagAtual = pageable.getPageNumber();
         int totalRegPorPag = pageable.getPageSize();
         int primRegPag = pagAtual * totalRegPorPag;
@@ -68,13 +68,14 @@ public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQue
         query.setMaxResults(totalRegPorPag);
     }
 
-    private Predicate[] criarRest(CategoriaForumFilter filter, CriteriaBuilder builder, Root<CategoriaForum> root) {
+    private Predicate[] criarRest(ModuloFilter filter, CriteriaBuilder builder, Root<Modulo> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getNome())){
-            predicates.add(builder.like(root.get("nomeCliente"), "%" + filter.getNome() + "%"));
+        if (StringUtils.hasText(filter.getTitulo())) {
+            predicates.add(builder.like(root.get("titulo"), "%" + filter.getTitulo() + "%"));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);
     }
+
 }

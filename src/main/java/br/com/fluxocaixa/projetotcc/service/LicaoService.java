@@ -16,7 +16,7 @@ public class LicaoService {
     @Transactional
     public Licao salvar(Licao licao){ return licaoRepository.save(licao); }
 
-    public Licao BouF(Long licaoId){
+    public Licao buscaroufalhar(Long licaoId){
         return licaoRepository.findById(licaoId)
                 .orElseThrow(() -> new EntityNotFoundException("Lição não encontrada com esse Id"));
     }

@@ -6,5 +6,5 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public interface MidiaRepositoryQuery {
-    public PageImpl<MidiaDto> filtra(MidiaFilter filter, Pageable pageable);
+    public PageImpl<MidiaDto> filtrar(MidiaFilter filter, Pageable pageable);
 }

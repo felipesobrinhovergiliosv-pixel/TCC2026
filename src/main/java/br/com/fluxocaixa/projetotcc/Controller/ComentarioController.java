@@ -2,6 +2,8 @@ package br.com.fluxocaixa.projetotcc.Controller;
 
 import br.com.fluxocaixa.projetotcc.dto.ComentarioDto;
 import br.com.fluxocaixa.projetotcc.model.Comentario;
+
+import br.com.fluxocaixa.projetotcc.repository.Comentario.ComentarioRepositoryImpl;
 import br.com.fluxocaixa.projetotcc.repository.ComentarioRepository;
 import br.com.fluxocaixa.projetotcc.repository.Filter.ComentarioFilter;
 import br.com.fluxocaixa.projetotcc.service.ComentarioService;
@@ -21,7 +23,7 @@ public class ComentarioController {
     private ComentarioRepository repository;
 
     @Autowired
-    private ComentarioImpl repositoryimpl;
+    private ComentarioRepositoryImpl repositoryimpl;
 
     @Autowired
     private ComentarioService service;

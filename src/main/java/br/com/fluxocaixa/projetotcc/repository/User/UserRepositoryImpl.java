@@ -1,8 +1,7 @@
-package br.com.fluxocaixa.projetotcc.repository.CategoriaForum;
-
-import br.com.fluxocaixa.projetotcc.dto.CategoriaForumDto;
-import br.com.fluxocaixa.projetotcc.model.CategoriaForum;
-import br.com.fluxocaixa.projetotcc.repository.Filter.CategoriaForumFilter;
+package br.com.fluxocaixa.projetotcc.repository.User;
+import br.com.fluxocaixa.projetotcc.dto.UserDto;
+import br.com.fluxocaixa.projetotcc.model.User;
+import br.com.fluxocaixa.projetotcc.repository.Filter.UserFilter;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -17,39 +16,39 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQuery {
-
+public class UserRepositoryImpl implements UserRepositoryQuery{
     @PersistenceContext
     private EntityManager manager;
 
     @Override
-    public PageImpl<CategoriaForumDto> filtrar(CategoriaForumFilter filter, Pageable pageable) {
+    public PageImpl<UserDto> filtrar(UserFilter filter, Pageable pageable) {
 
-        CriteriaBuilder builder= manager.getCriteriaBuilder();
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
 
-        CriteriaQuery<CategoriaForumDto> criteria = builder.createQuery(CategoriaForumDto.class);
+        CriteriaQuery<UserDto> criteria = builder.createQuery(UserDto.class);
 
-        Root<CategoriaForum> root = criteria.from(CategoriaForum.class);
+        Root<User> root = criteria.from(User.class);
 
-        criteria.select(builder.construct(CategoriaForumDto.class,
+        criteria.select(builder.construct(UserDto.class,
                 root.get("id"),
-                root.get("nome")
+                root.get("user"),
+                root.get("email")
         ));
 
         Predicate[] predicates = criarRest(filter, builder, root);
         criteria.where(predicates);
-        criteria.orderBy(builder.asc(root.get("nome")));
+        criteria.orderBy(builder.asc(root.get("user")));
 
-        TypedQuery<CategoriaForumDto> query = manager.createQuery(criteria);
-        addRestPag(query,pageable);
+        TypedQuery<UserDto> query = manager.createQuery(criteria);
+        addRestPag(query, pageable);
 
         return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
 
-    private long total(CategoriaForumFilter filter) {
+    private long total(UserFilter filter) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
-        Root<CategoriaForum> root = criteria.from(CategoriaForum.class);
+        Root<User> root = criteria.from(User.class);
 
         Predicate[] predicates = criarRest(filter, builder, root);
         criteria.where(predicates);
@@ -59,7 +58,7 @@ public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQue
         return manager.createQuery(criteria).getSingleResult();
     }
 
-    private void addRestPag(TypedQuery<CategoriaForumDto> query, Pageable pageable) {
+    private void addRestPag(TypedQuery<UserDto> query, Pageable pageable) {
         int pagAtual = pageable.getPageNumber();
         int totalRegPorPag = pageable.getPageSize();
         int primRegPag = pagAtual * totalRegPorPag;
@@ -68,13 +67,17 @@ public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQue
         query.setMaxResults(totalRegPorPag);
     }
 
-    private Predicate[] criarRest(CategoriaForumFilter filter, CriteriaBuilder builder, Root<CategoriaForum> root) {
+    private Predicate[] criarRest(UserFilter filter, CriteriaBuilder builder, Root<User> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getNome())){
-            predicates.add(builder.like(root.get("nomeCliente"), "%" + filter.getNome() + "%"));
+        if (StringUtils.hasText(filter.getEmail())) {
+            predicates.add(builder.like(root.get("email"), "%" + filter.getEmail() + "%"));
+        }
+        if (StringUtils.hasText(filter.getUser())) {
+            predicates.add(builder.like(root.get("user"), "%" + filter.getUser() + "%"));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);
     }
+
 }

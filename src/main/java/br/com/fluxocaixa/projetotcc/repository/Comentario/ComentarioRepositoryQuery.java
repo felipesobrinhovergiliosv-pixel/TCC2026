@@ -6,5 +6,5 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public interface ComentarioRepositoryQuery {
-    public PageImpl<ComentarioDto> filtar(ComentarioFilter filter, Pageable pageable);
+    public PageImpl<ComentarioDto> filtrar(ComentarioFilter filter, Pageable pageable);
 }

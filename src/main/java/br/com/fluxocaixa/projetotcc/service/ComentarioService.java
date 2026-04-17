@@ -1,5 +1,6 @@
 package br.com.fluxocaixa.projetotcc.service;
 
+import br.com.fluxocaixa.projetotcc.model.CategoriaForum;
 import br.com.fluxocaixa.projetotcc.model.Comentario;
 import br.com.fluxocaixa.projetotcc.repository.ComentarioRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,6 +20,11 @@ public class ComentarioService {
     public Comentario BouF(Long comentarioId){
         return comentarioRepository.findById(comentarioId)
                 .orElseThrow(() -> new EntityNotFoundException("Comentario não encontrado com esse Id"));
+    }
+
+    public Comentario buscaroufalhar(Long comentarioId){
+        return comentarioRepository.findById(comentarioId)
+                .orElseThrow(() -> new EntityNotFoundException("Comentario não encontrado com esse id"));
     }
 
     @Transactional
