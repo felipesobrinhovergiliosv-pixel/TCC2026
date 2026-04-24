@@ -30,7 +30,6 @@ public class UserRepositoryImpl implements UserRepositoryQuery{
         Root<User> root = criteria.from(User.class);
 
         criteria.select(builder.construct(UserDto.class,
-                root.get("id"),
                 root.get("user"),
                 root.get("email")
         ));

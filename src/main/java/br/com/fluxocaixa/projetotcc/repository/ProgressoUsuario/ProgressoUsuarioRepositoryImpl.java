@@ -30,7 +30,6 @@ public class ProgressoUsuarioRepositoryImpl implements ProgressoUsuarioRepositor
         Root<ProgressoUsuario> root = criteria.from(ProgressoUsuario.class);
 
         criteria.select(builder.construct(ProgressoUsuarioDto.class,
-                root.get("id"),
                 root.get("concluido"),
                 root.get("dataConclusao")
         ));

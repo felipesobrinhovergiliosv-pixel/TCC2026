@@ -30,10 +30,10 @@ public class User {
 
     @PositiveOrZero
     @Column(name = "xp_total")
-    private Long xpTotal;
+    private Integer xpTotal;
 
     @DecimalMin("1")
-    private Long nivel;
+    private Integer nivel;
 
     @Column(name = "data_criacao")
     private Date dataCriacao;

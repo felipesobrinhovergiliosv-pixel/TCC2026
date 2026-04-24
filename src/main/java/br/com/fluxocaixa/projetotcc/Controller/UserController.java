@@ -14,14 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/userController")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserRepository repository;
-
-    @Autowired
-    private UserRepositoryImpl repositoryimpl;
 
     @Autowired
     private UserService service;
@@ -33,7 +30,7 @@ public class UserController {
 
     @GetMapping("/pornome")
     public Page<UserDto> listarPorNome(UserFilter userFilter, Pageable pageable){
-        return repositoryimpl.filtrar(userFilter, pageable);
+        return repository.filtrar(userFilter, pageable);
     }
 
     @GetMapping("/{userId}")

@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/moduloController")
+@RequestMapping("/modulo")
 public class ModuloController {
 
     @Autowired
     private ModuloRepository repository;
-
-    @Autowired
-    private ModuloRepositoryImpl repositoryimpl;
 
     @Autowired
     private ModuloService service;
@@ -34,7 +31,7 @@ public class ModuloController {
 
     @GetMapping("/pornome")
     public Page<ModuloDto> listarPorNome(ModuloFilter moduloFilter, Pageable pageable){
-        return repositoryimpl.filtrar(moduloFilter, pageable);
+        return repository.filtrar(moduloFilter, pageable);
     }
 
     @GetMapping("/{moduloId}")

@@ -22,9 +22,6 @@ public class CategoriaForumController {
     private CategoriaForumRepository repository;
 
     @Autowired
-    private CategoriaForumRepositoryImpl repositoryimpl;
-
-    @Autowired
     private CategoriaForumService service;
 
     @GetMapping
@@ -33,8 +30,8 @@ public class CategoriaForumController {
     }
 
     @GetMapping("/pornome")
-    public Page<CategoriaForumDto> listarPorNome(CategoriaForumFilter categoriaForumFilter, Pageable pageable){
-        return repositoryimpl.filtrar(categoriaForumFilter, pageable);
+    public Page<CategoriaForumDto> listarPorNome(CategoriaForumFilter filter, Pageable pageable){
+        return repository.filtrar(filter, pageable);
     }
 
     @GetMapping("/{categoriaForumId}")
