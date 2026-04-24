@@ -43,6 +43,9 @@ Este repositório contém o projeto de Trabalho de Conclusão de Curso (TCC) do 
 * [**Felipe Sobrinho Vergilio**](https://github.com/felipesobrinhovergiliosv-pixel)
 * [**Miguel Pelegrin dos Santos**](https://github.com/MiguelPelegrin)
 
+### 🎨 FrontEnd:
+* https://github.com/EnzoGuerato/FrontMEITracking
+
 ### 🤝 Agradecimentos Especiais:
 Dedicamos este projeto e deixamos nosso muito obrigado aos professores que foram fundamentais na realização deste trabalho:
 * **Prof. Esp. Rogério Luna Furlan:** Pelo apoio essencial no desenvolvimento da nossa plataforma de aprendizado.
