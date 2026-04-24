@@ -2,9 +2,9 @@
 
 <div align="center">
   <img src="src/main/resources/Site/imgs/logo meizinho/meizinhoescrito.png" alt="Logo MEI track" width="400">
-  
-  # 🚀 MEI track: Plataforma de Aprendizado de Gestão
-  **Sua plataforma definitiva de ensino e comunidade para Microempreendedores.**
+
+# 🚀 MEI track: Plataforma de Aprendizado de Gestão
+**Sua plataforma definitiva de ensino e comunidade para Microempreendedores.**
 </div>
 
 ---
@@ -45,9 +45,6 @@ Este repositório contém o projeto de Trabalho de Conclusão de Curso (TCC) do 
 * [**Enzo Canale Guerato**](https://github.com/EnzoGuerato)
 * [**Felipe Sobrinho Vergilio**](https://github.com/felipesobrinhovergiliosv-pixel)
 * [**Miguel Pelegrin dos Santos**](https://github.com/MiguelPelegrin)
-
-### 🎨 FrontEnd:
-* https://github.com/EnzoGuerato/FrontMEITracking
 
 ### 🤝 Agradecimentos Especiais:
 Dedicamos este projeto e deixamos nosso muito obrigado aos professores que foram fundamentais na realização deste trabalho:
