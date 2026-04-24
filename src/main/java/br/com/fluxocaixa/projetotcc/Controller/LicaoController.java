@@ -21,9 +21,6 @@ public class LicaoController {
     private LicaoRepository repository;
 
     @Autowired
-    private LicaoRepositoryImpl repositoryimpl;
-
-    @Autowired
     private LicaoService service;
 
     @GetMapping
@@ -33,7 +30,7 @@ public class LicaoController {
 
     @GetMapping("/pornome")
     public Page<LicaoDto> listarPorNome(LicaoFilter licaoFilter, Pageable pageable){
-        return repositoryimpl.filtrar(licaoFilter, pageable);
+        return repository.filtrar(licaoFilter, pageable);
     }
 
     @GetMapping("/{licaoId}")

@@ -14,14 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/MidiaController")
+@RequestMapping("/Midia")
 public class MidiaController {
 
     @Autowired
     private MidiaRepository repository;
-
-    @Autowired
-    private MidiaRepositoryImpl repositoryimpl;
 
     @Autowired
     private MidiaService service;
@@ -33,7 +30,7 @@ public class MidiaController {
 
     @GetMapping("/pornome")
     public Page<MidiaDto> listarPorNome(MidiaFilter midiaFilter, Pageable pageable){
-        return repositoryimpl.filtrar(midiaFilter, pageable);
+        return repository.filtrar(midiaFilter, pageable);
     }
 
     @GetMapping("/{midiaId}")

@@ -31,7 +31,6 @@ public class MidiaRepositoryImpl implements MidiaRepositoryQuery{
         Root<Midia> root = criteria.from(Midia.class);
 
         criteria.select(builder.construct(MidiaDto.class,
-                root.get("id"),
                 root.get("nome"),
                 root.get("tipomidia")
         ));

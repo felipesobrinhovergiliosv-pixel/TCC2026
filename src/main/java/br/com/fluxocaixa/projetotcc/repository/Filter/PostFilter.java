@@ -12,5 +12,5 @@ public class PostFilter {
     private Long upvotes;
 
     @Column(name = "data_publicacao")
-    private Date dataPublicacao;
+    private Date data_publicacao;
 }

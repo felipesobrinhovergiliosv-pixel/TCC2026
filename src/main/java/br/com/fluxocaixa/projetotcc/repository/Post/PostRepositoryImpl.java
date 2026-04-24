@@ -29,9 +29,8 @@ public class PostRepositoryImpl implements PostRepositoryQuery{
         Root<Post> root = criteria.from(Post.class);
 
         criteria.select(builder.construct(PostDto.class,
-                root.get("id"),
                 root.get("titulo"),
-                root.get("dataPublicação"),
+                root.get("data_publicacao"),
                 root.get("upvotes")
         ));
 
@@ -73,8 +72,8 @@ public class PostRepositoryImpl implements PostRepositoryQuery{
         if (StringUtils.hasText(filter.getTitulo())) {
             predicates.add(builder.like(root.get("titulo"), "%" + filter.getTitulo() + "%"));
         }
-        if (filter.getDataPublicacao() != null) {
-            predicates.add(builder.equal(root.get("dataPublicacao"), filter.getDataPublicacao()));
+        if (filter.getData_publicacao() != null) {
+            predicates.add(builder.equal(root.get("data_publicacao"), filter.getData_publicacao()));
         }
         if (filter.getUpvotes() != null) {
             predicates.add(builder.equal(root.get("Upvotes"), filter.getUpvotes()));

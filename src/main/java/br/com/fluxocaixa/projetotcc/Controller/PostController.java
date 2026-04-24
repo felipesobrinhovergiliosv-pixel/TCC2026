@@ -15,14 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/postController")
+@RequestMapping("/post")
 public class PostController {
     @Autowired
     private PostRepository repository;
-
-    @Autowired
-    private PostRepositoryImpl repositoryimpl;
-
     @Autowired
     private PostService service;
 
@@ -33,7 +29,7 @@ public class PostController {
 
     @GetMapping("/pornome")
     public Page<PostDto> listarPorNome(PostFilter postFilter, Pageable pageable){
-        return repositoryimpl.filtrar(postFilter, pageable);
+        return repository.filtrar(postFilter, pageable);
     }
 
     @GetMapping("/{postId}")

@@ -7,5 +7,5 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public interface CategoriaForumRepositoryQuery {
-    public PageImpl<CategoriaForumDto> filtrar(CategoriaForumFilter filter, Pageable pageable);
+    Page<CategoriaForumDto> filtrar(CategoriaForumFilter filter, Pageable pageable);
 }

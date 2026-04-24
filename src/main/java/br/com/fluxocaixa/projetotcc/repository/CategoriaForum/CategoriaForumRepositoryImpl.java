@@ -32,7 +32,6 @@ public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQue
         Root<CategoriaForum> root = criteria.from(CategoriaForum.class);
 
         criteria.select(builder.construct(CategoriaForumDto.class,
-                root.get("id"),
                 root.get("nome")
         ));
 

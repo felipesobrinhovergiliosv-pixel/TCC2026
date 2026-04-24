@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/requestController")
+@RequestMapping("/progressoUsuario")
 public class ProgressoUsuarioController {
 
     @Autowired
     private ProgressoUsuarioRepository repository;
-
-    @Autowired
-    private ProgressoUsuarioRepositoryImpl repositoryimpl;
 
     @Autowired
     private ProgressoUsuarioService service;
@@ -34,7 +31,7 @@ public class ProgressoUsuarioController {
 
     @GetMapping("/pornome")
     public Page<ProgressoUsuarioDto> listarPorNome(ProgressoUsuarioFilter progressoUsuarioFilter, Pageable pageable){
-        return repositoryimpl.filtrar(progressoUsuarioFilter, pageable);
+        return repository.filtrar(progressoUsuarioFilter, pageable);
     }
 
     @GetMapping("/{progressoUsuarioId}")

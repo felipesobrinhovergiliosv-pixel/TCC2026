@@ -23,9 +23,6 @@ public class ComentarioController {
     private ComentarioRepository repository;
 
     @Autowired
-    private ComentarioRepositoryImpl repositoryimpl;
-
-    @Autowired
     private ComentarioService service;
 
     @GetMapping
@@ -35,7 +32,7 @@ public class ComentarioController {
 
     @GetMapping("/pornome")
     public Page<ComentarioDto> listarPorNome(ComentarioFilter comentarioFilter, Pageable pageable){
-        return repositoryimpl.filtrar(comentarioFilter, pageable);
+        return repository.filtrar(comentarioFilter, pageable);
     }
 
     @GetMapping("/{comentarioId}")

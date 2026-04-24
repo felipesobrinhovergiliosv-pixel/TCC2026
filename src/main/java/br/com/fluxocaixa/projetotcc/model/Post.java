@@ -30,16 +30,13 @@ public class Post {
     @NotBlank
     private String conteudo_texto;
 
-    @NotBlank
-    private String midia_url;
-
     @PositiveOrZero
     @NotNull
     //likes no post
     private Integer upvotes;
 
     @NotNull
-    private LocalDate data_publicação;
+    private LocalDate data_publicacao;
 
     @NotNull
     @ManyToOne

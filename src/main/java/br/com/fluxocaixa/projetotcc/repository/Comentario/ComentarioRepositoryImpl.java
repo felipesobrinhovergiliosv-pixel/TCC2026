@@ -32,7 +32,6 @@ public class ComentarioRepositoryImpl implements ComentarioRepositoryQuery {
         Root<Comentario> root = criteria.from(Comentario.class);
 
         criteria.select(builder.construct(ComentarioDto.class,
-                root.get("id"),
                 root.get("conteudoTexto"),
                 root.get("dataPublicação"),
                 root.get("upvotes")

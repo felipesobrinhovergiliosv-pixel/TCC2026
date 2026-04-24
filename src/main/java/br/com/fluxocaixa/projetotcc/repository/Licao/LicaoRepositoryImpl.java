@@ -27,7 +27,6 @@ public class LicaoRepositoryImpl implements LicaoRepositoryQuery{
         Root<Licao> root = criteria.from(Licao.class);
 
         criteria.select(builder.construct(LicaoDto.class,
-                root.get("id"),
                 root.get("titulo"),
                 root.get("conteudo"),
                 root.get("modulo")
