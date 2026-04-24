@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "progressousuario")
+@Table(name = "progresso_usuario")
 public class ProgressoUsuario {
 
     @Id
@@ -22,7 +22,7 @@ public class ProgressoUsuario {
     private Boolean concluido;
 
     @NotNull
-    private LocalDate data_conclusão;
+    private LocalDate data_conclusao;
 
     @NotNull
     @ManyToOne

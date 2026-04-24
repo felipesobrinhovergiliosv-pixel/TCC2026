@@ -47,11 +47,11 @@ CREATE TABLE licao (
 
 -- PROGRESSO USUARIO
 CREATE TABLE progresso_usuario (
+  id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   licao_id INT NOT NULL,
   concluido BOOLEAN DEFAULT FALSE,
   data_conclusao DATETIME DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (user_id, licao_id),
   FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (licao_id) REFERENCES licao(id)
 );

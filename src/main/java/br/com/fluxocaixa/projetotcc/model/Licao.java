@@ -20,6 +20,7 @@ public class Licao {
     @NotBlank
     private String titulo;
 
+    @Column(name = "conteudo_json")
     private String conteudo;
 
     @NotNull
