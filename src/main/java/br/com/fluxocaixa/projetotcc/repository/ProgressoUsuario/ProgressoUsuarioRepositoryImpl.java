@@ -11,12 +11,11 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgressoUsuarioImpl implements ProgressoUsuarioRepositoryQuery{
+public class ProgressoUsuarioRepositoryImpl implements ProgressoUsuarioRepositoryQuery{
 
     @PersistenceContext
     private EntityManager manager;
