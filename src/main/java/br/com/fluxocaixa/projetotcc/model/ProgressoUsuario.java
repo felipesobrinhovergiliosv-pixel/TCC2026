@@ -1,9 +1,6 @@
 package br.com.fluxocaixa.projetotcc.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,6 +12,11 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "progressousuario")
 public class ProgressoUsuario {
+
+    @Id
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
     private Boolean concluido;

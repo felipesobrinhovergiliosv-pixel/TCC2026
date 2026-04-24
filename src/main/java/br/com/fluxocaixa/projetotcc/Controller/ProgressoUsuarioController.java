@@ -3,7 +3,7 @@ package br.com.fluxocaixa.projetotcc.Controller;
 import br.com.fluxocaixa.projetotcc.dto.ProgressoUsuarioDto;
 import br.com.fluxocaixa.projetotcc.model.ProgressoUsuario;
 import br.com.fluxocaixa.projetotcc.repository.Filter.ProgressoUsuarioFilter;
-import br.com.fluxocaixa.projetotcc.repository.ProgressoUsuario.ProgressoUsuarioImpl;
+import br.com.fluxocaixa.projetotcc.repository.ProgressoUsuario.ProgressoUsuarioRepositoryImpl;
 import br.com.fluxocaixa.projetotcc.repository.ProgressoUsuarioRepository;
 import br.com.fluxocaixa.projetotcc.service.ProgressoUsuarioService;
 import org.springframework.beans.BeanUtils;
@@ -22,7 +22,7 @@ public class ProgressoUsuarioController {
     private ProgressoUsuarioRepository repository;
 
     @Autowired
-    private ProgressoUsuarioImpl repositoryimpl;
+    private ProgressoUsuarioRepositoryImpl repositoryimpl;
 
     @Autowired
     private ProgressoUsuarioService service;
