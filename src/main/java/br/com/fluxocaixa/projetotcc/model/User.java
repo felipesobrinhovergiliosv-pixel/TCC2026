@@ -1,6 +1,7 @@
 package br.com.fluxocaixa.projetotcc.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -20,7 +21,7 @@ import java.util.Date;
 @Data
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "user")
+@Table(name = "`user`")
 public class User implements UserDetails {
     @Id
     @EqualsAndHashCode.Include
@@ -28,11 +29,13 @@ public class User implements UserDetails {
     private Long id;
 
     @NotBlank
+    @Column(name = "`user`", unique = true)
     private String user;
 
     @NotBlank
     private String email;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotBlank
     private String senha;
 

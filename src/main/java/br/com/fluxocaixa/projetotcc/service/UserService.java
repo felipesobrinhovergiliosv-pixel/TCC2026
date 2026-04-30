@@ -4,6 +4,7 @@ import br.com.fluxocaixa.projetotcc.model.User;
 import br.com.fluxocaixa.projetotcc.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +14,15 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
-    public User salvar(User user){ return userRepository.save(user); }
+    public User salvar(User user){
+        String senhaCriptografada = passwordEncoder.encode(user.getSenha());
+        user.setSenha(senhaCriptografada);
+        return userRepository.save(user);
+    }
 
     public User buscaroufalhar(Long userId){
         return userRepository.findById(userId)
