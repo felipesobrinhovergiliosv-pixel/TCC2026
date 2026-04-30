@@ -1,9 +1,7 @@
--- ENUM
 CREATE TABLE tipo_midia_enum (
   tipo ENUM('VIDEO', 'IMAGEM', 'AUDIO', 'NENHUM') PRIMARY KEY
 );
 
--- USER
 CREATE TABLE user (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user VARCHAR(50) NOT NULL UNIQUE,
@@ -14,14 +12,12 @@ CREATE TABLE user (
   data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- MODULO
 CREATE TABLE modulo (
   id INT AUTO_INCREMENT PRIMARY KEY,
   titulo VARCHAR(100) NOT NULL,
   ordem INT NOT NULL UNIQUE COMMENT 'Define a sequência: 1, 2, 3...'
 );
 
--- MIDIA
 CREATE TABLE midia (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(255) NOT NULL,
@@ -29,13 +25,11 @@ CREATE TABLE midia (
   tipo_midia varchar(20)
 );
 
--- CATEGORIA FORUM
 CREATE TABLE categoria_forum (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(50) NOT NULL UNIQUE
 );
 
--- LICAO
 CREATE TABLE licao (
   id INT AUTO_INCREMENT PRIMARY KEY,
   modulo_id INT NOT NULL,
@@ -45,7 +39,6 @@ CREATE TABLE licao (
   FOREIGN KEY (modulo_id) REFERENCES modulo(id)
 );
 
--- PROGRESSO USUARIO
 CREATE TABLE progresso_usuario (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
@@ -56,7 +49,6 @@ CREATE TABLE progresso_usuario (
   FOREIGN KEY (licao_id) REFERENCES licao(id)
 );
 
--- POST
 CREATE TABLE post (
   id INT AUTO_INCREMENT PRIMARY KEY,
   categoria_id INT NOT NULL,
@@ -71,7 +63,6 @@ CREATE TABLE post (
   FOREIGN KEY (midia_id) REFERENCES midia(id)
 );
 
--- COMENTARIO
 CREATE TABLE comentario (
   id INT AUTO_INCREMENT PRIMARY KEY,
   post_id INT NOT NULL,
