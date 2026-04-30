@@ -10,9 +10,9 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,8 +70,8 @@ public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQue
     private Predicate[] criarRest(CategoriaForumFilter filter, CriteriaBuilder builder, Root<CategoriaForum> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getNome())){
-            predicates.add(builder.like(root.get("nomeCliente"), "%" + filter.getNome() + "%"));
+        if (!StringUtils.isEmpty(filter.getNome())){
+            predicates.add(builder.like(builder.lower(root.get("nomeCliente")), "%" + filter.getNome() + "%"));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);

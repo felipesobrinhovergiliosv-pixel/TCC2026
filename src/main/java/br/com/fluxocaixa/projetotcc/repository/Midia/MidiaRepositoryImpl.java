@@ -1,17 +1,15 @@
 package br.com.fluxocaixa.projetotcc.repository.Midia;
 import br.com.fluxocaixa.projetotcc.dto.MidiaDto;
 import br.com.fluxocaixa.projetotcc.model.Midia;
-import br.com.fluxocaixa.projetotcc.model.TipoMidia;
 import br.com.fluxocaixa.projetotcc.repository.Filter.MidiaFilter;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import jakarta.validation.constraints.NotBlank;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,11 +69,11 @@ public class MidiaRepositoryImpl implements MidiaRepositoryQuery{
     private Predicate[] criarRest(MidiaFilter filter, CriteriaBuilder builder, Root<Midia> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getNome())) {
-            predicates.add(builder.like(root.get("nome"), "%" + filter.getNome() + "%"));
+        if (!StringUtils.isEmpty(filter.getNome())) {
+            predicates.add(builder.like(builder.lower(root.get("nome")), "%" + filter.getNome() + "%"));
         }
-        if (StringUtils.hasText(String.valueOf(filter.getTipoMidia()))) {
-            predicates.add(builder.like(root.get("tipoMidia").get("id"), "%" + filter.getNome() + "%"));
+        if (!StringUtils.isEmpty(String.valueOf(filter.getTipoMidia()))) {
+            predicates.add(builder.like(builder.lower(root.get("tipoMidia").get("id")), "%" + filter.getNome() + "%"));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);

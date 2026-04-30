@@ -9,9 +9,9 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +69,7 @@ public class PostRepositoryImpl implements PostRepositoryQuery{
     private Predicate[] criarRest(PostFilter filter, CriteriaBuilder builder, Root<Post> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getTitulo())) {
+        if (!StringUtils.isEmpty(filter.getTitulo())) {
             predicates.add(builder.like(root.get("titulo"), "%" + filter.getTitulo() + "%"));
         }
         if (filter.getData_publicacao() != null) {

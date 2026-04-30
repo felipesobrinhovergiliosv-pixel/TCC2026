@@ -47,7 +47,6 @@ public class UserController {
     @PutMapping("/{userId}")
     public User alterar(@PathVariable Long userId, @RequestBody User user){
         User userAtual = service.buscaroufalhar(userId);
-
         BeanUtils.copyProperties(user, userAtual, "id");
         return service.salvar(userAtual);
     }

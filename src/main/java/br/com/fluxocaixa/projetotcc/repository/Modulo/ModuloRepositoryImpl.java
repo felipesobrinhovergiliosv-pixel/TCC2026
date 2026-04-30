@@ -12,7 +12,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +71,8 @@ public class ModuloRepositoryImpl implements ModuloRepositoryQuery{
     private Predicate[] criarRest(ModuloFilter filter, CriteriaBuilder builder, Root<Modulo> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getTitulo())) {
-            predicates.add(builder.like(root.get("titulo"), "%" + filter.getTitulo() + "%"));
+        if (!StringUtils.isEmpty(filter.getTitulo())) {
+            predicates.add(builder.like(builder.lower(root.get("titulo")), "%" + filter.getTitulo() + "%"));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);

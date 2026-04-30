@@ -7,9 +7,10 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,8 +68,8 @@ public class LicaoRepositoryImpl implements LicaoRepositoryQuery{
     private Predicate[] criarRest(LicaoFilter filter, CriteriaBuilder builder, Root<Licao> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getTitulo())){
-            predicates.add(builder.like(root.get("titulo"), "%" + filter.getTitulo() + "%"));
+        if (!StringUtils.isEmpty(filter.getTitulo())){
+            predicates.add(builder.like(builder.lower(root.get("titulo")), "%" + filter.getTitulo() + "%"));
         }
         if (filter.getConteudo() != null) {
             predicates.add(builder.equal(root.get("conteudo"), filter.getConteudo()));

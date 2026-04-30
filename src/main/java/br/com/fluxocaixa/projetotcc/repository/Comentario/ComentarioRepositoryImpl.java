@@ -10,9 +10,9 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +72,8 @@ public class ComentarioRepositoryImpl implements ComentarioRepositoryQuery {
     private Predicate[] criarRest(ComentarioFilter filter, CriteriaBuilder builder, Root<Comentario> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getConteudoTexto())) {
-            predicates.add(builder.like(root.get("conteudo_texto"), "%" + filter.getConteudoTexto() + "%"));
+        if (!StringUtils.isEmpty(filter.getConteudoTexto())) {
+            predicates.add(builder.like(builder.lower(root.get("conteudo_texto")), "%" + filter.getConteudoTexto() + "%"));
         }
         if (filter.getDataPublicacao() != null) {
             predicates.add(builder.equal(root.get("dataPublicacao"), filter.getDataPublicacao()));

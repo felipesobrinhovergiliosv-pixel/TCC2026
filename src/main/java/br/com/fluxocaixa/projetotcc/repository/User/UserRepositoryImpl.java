@@ -11,7 +11,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,11 +69,11 @@ public class UserRepositoryImpl implements UserRepositoryQuery{
     private Predicate[] criarRest(UserFilter filter, CriteriaBuilder builder, Root<User> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (StringUtils.hasText(filter.getEmail())) {
-            predicates.add(builder.like(root.get("email"), "%" + filter.getEmail() + "%"));
+        if (!StringUtils.isEmpty(filter.getEmail())) {
+            predicates.add(builder.like(builder.lower(root.get("email")), "%" + filter.getEmail() + "%"));
         }
-        if (StringUtils.hasText(filter.getUser())) {
-            predicates.add(builder.like(root.get("user"), "%" + filter.getUser() + "%"));
+        if (!StringUtils.isEmpty(filter.getUser())) {
+            predicates.add(builder.like(builder.lower(root.get("user")), "%" + filter.getUser() + "%"));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);
