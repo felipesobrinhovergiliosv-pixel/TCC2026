@@ -1,7 +1,7 @@
 package br.com.fluxocaixa.projetotcc.model;
 
 public enum TipoMidia {
-    VIDEO("Atendido"),
+    VIDEO("Video"),
     IMAGEM("Imagem"),
     AUDIO("Audio"),
     NENHUM("Nenhum");

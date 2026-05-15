@@ -39,6 +39,12 @@ public class User implements UserDetails {
     @NotBlank
     private String senha;
 
+    private String descr;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "plano")
+    private Plano plano;
+
     @PositiveOrZero
     @Column(name = "xp_total")
     private Integer xpTotal;
