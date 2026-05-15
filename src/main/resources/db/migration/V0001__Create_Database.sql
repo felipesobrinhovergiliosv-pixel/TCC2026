@@ -8,8 +8,6 @@ CREATE TABLE user (
   email VARCHAR(100) NOT NULL UNIQUE,
   senha VARCHAR(255) NOT NULL,
   descr VARCHAR(255),
-  xp_total INT DEFAULT 0,
-  nivel INT DEFAULT 1,
   plano VARCHAR(20),
   data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -79,3 +77,13 @@ CREATE TABLE comentario (
   FOREIGN KEY (parent_id) REFERENCES comentario(id),
   FOREIGN KEY (midia_id) REFERENCES midia(id)
 );
+
+CREATE TABLE game (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  vidas INT NOT NULL DEFAULT 5,
+  moedas INT NOT NULL DEFAULT 0,
+  streak INT NOT NULL DEFAULT 0,
+
+  FOREIGN KEY (user_id) REFERENCES user(id),
+)

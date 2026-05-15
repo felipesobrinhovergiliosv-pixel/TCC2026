@@ -45,13 +45,6 @@ public class User implements UserDetails {
     @Column(name = "plano")
     private Plano plano;
 
-    @PositiveOrZero
-    @Column(name = "xp_total")
-    private Integer xpTotal;
-
-    @DecimalMin("1")
-    private Integer nivel;
-
     @Column(name = "data_criacao")
     private Date dataCriacao;
 
