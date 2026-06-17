@@ -55,7 +55,7 @@ CREATE TABLE post (
   user_id INT NOT NULL,
   titulo VARCHAR(200) NOT NULL,
   conteudo_texto TEXT NOT NULL,
-  midia_id INT NOT NULL,
+  midia_id INT,
   upvotes INT DEFAULT 0,
   data_publicacao DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (categoria_id) REFERENCES categoria_forum(id),
@@ -85,5 +85,5 @@ CREATE TABLE game (
   moedas INT NOT NULL DEFAULT 0,
   streak INT NOT NULL DEFAULT 0,
 
-  FOREIGN KEY (user_id) REFERENCES user(id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
 )

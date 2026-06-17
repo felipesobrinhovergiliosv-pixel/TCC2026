@@ -48,7 +48,6 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "midia_id")
     private Midia midia;
