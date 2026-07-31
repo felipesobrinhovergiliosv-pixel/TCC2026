@@ -54,6 +54,4 @@ Dedicamos este projeto e deixamos nosso muito obrigado aos professores que foram
 ---
 <div align="center">
   <i>"Eu acredito que às vezes são as pessoas que ninguém espera nada que fazem as coisas que ninguém consegue imaginar."</i>
-  <br><br>
-  Feito com 🧡 para fortalecer o empreendedor brasileiro.
 </div>
