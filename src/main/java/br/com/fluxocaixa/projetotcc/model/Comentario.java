@@ -1,5 +1,6 @@
 package br.com.fluxocaixa.projetotcc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -28,6 +29,7 @@ public class Comentario {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"email", "plano", "dataCriacao", "admin"})
     private User user;
 
     @ManyToOne
@@ -38,7 +40,7 @@ public class Comentario {
     @Column(name = "conteudo_texto")
     private String conteudoTexto;
 
-    @NotNull
+    // Comentário de texto simples não é obrigado a ter mídia (ver V0003__Comentario_Midia_Opcional.sql)
     @ManyToOne
     @JoinColumn(name = "midia_id")
     private Midia midia;

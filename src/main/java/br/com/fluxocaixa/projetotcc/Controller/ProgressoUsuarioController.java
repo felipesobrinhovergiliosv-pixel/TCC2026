@@ -2,14 +2,17 @@ package br.com.fluxocaixa.projetotcc.Controller;
 
 import br.com.fluxocaixa.projetotcc.dto.ProgressoUsuarioDto;
 import br.com.fluxocaixa.projetotcc.model.ProgressoUsuario;
+import br.com.fluxocaixa.projetotcc.model.User;
 import br.com.fluxocaixa.projetotcc.repository.Filter.ProgressoUsuarioFilter;
 import br.com.fluxocaixa.projetotcc.repository.ProgressoUsuario.ProgressoUsuarioRepositoryImpl;
 import br.com.fluxocaixa.projetotcc.repository.ProgressoUsuarioRepository;
 import br.com.fluxocaixa.projetotcc.service.ProgressoUsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,21 +38,31 @@ public class ProgressoUsuarioController {
     }
 
     @GetMapping("/{progressoUsuarioId}")
-    public ProgressoUsuario buscar(@PathVariable Long progressoUsuarioId ){
-        return service.buscaroufalhar(progressoUsuarioId);
+    public ProgressoUsuario buscar(@PathVariable Long progressoUsuarioId, @AuthenticationPrincipal User usuarioLogado){
+        ProgressoUsuario progresso = service.buscaroufalhar(progressoUsuarioId);
+        service.validarDono(progresso, usuarioLogado);
+        return progresso;
     }
 
     @PostMapping
-    public ProgressoUsuario adicionar(@RequestBody ProgressoUsuario progressoUsuario) { return service.salvar(progressoUsuario); }
+    public ProgressoUsuario adicionar(@RequestBody @Valid ProgressoUsuario progressoUsuario, @AuthenticationPrincipal User usuarioLogado) {
+        progressoUsuario.setUser(usuarioLogado);
+        return service.salvar(progressoUsuario);
+    }
 
     @DeleteMapping("/{progressoUsuarioId}")
-    public void remover(@PathVariable Long progressoUsuarioId){ service.excluir(progressoUsuarioId);}
+    public void remover(@PathVariable Long progressoUsuarioId, @AuthenticationPrincipal User usuarioLogado){
+        ProgressoUsuario progresso = service.buscaroufalhar(progressoUsuarioId);
+        service.validarDono(progresso, usuarioLogado);
+        service.excluir(progressoUsuarioId);
+    }
 
     @PutMapping("/{progressoUsuarioId}")
-    public ProgressoUsuario alterar(@PathVariable Long progressoUsuarioId, @RequestBody ProgressoUsuario progressoUsuario){
+    public ProgressoUsuario alterar(@PathVariable Long progressoUsuarioId, @RequestBody @Valid ProgressoUsuario progressoUsuario, @AuthenticationPrincipal User usuarioLogado){
         ProgressoUsuario progressoUsuarioAtual = service.buscaroufalhar(progressoUsuarioId);
+        service.validarDono(progressoUsuarioAtual, usuarioLogado);
 
-        BeanUtils.copyProperties(progressoUsuario, progressoUsuarioAtual, "id");
+        BeanUtils.copyProperties(progressoUsuario, progressoUsuarioAtual, "id", "user");
         return service.salvar(progressoUsuarioAtual);
     }
 

@@ -1,12 +1,11 @@
 package br.com.fluxocaixa.projetotcc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.aspectj.apache.bcel.generic.LineNumberGen;
 
 @Data
 @Entity
@@ -17,6 +16,12 @@ public class Game {
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"email", "plano", "dataCriacao", "admin"})
+    private User user;
 
     @NotNull
     @PositiveOrZero

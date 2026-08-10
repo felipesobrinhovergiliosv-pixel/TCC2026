@@ -38,6 +38,16 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user").permitAll()
                         .requestMatchers("/error").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/licao/*/responder").authenticated()
+                        // Conteúdo do curso (modulo/licao/midia/categoriaForum) só pode ser
+                        // criado/editado/removido por administradores; leitura continua liberada
+                        // pra qualquer usuário autenticado.
+                        .requestMatchers(HttpMethod.POST, "/modulo/**", "/licao/**", "/midia/**", "/categoriaForum/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/modulo/**", "/licao/**", "/midia/**", "/categoriaForum/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/modulo/**", "/licao/**", "/midia/**", "/categoriaForum/**").hasRole("ADMIN")
+                        // Lista completa de usuários (dados de todo mundo) só pra admin.
+                        .requestMatchers(HttpMethod.GET, "/user").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/game", "/game/pornome", "/progressoUsuario", "/progressoUsuario/pornome").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
@@ -48,7 +58,7 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:5500"));
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 

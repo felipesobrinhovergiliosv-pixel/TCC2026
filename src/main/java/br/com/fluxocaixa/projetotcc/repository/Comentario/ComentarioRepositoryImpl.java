@@ -33,7 +33,7 @@ public class ComentarioRepositoryImpl implements ComentarioRepositoryQuery {
 
         criteria.select(builder.construct(ComentarioDto.class,
                 root.get("conteudoTexto"),
-                root.get("dataPublicação"),
+                root.get("dataPublicacao"),
                 root.get("upvotes")
         ));
 
@@ -73,13 +73,13 @@ public class ComentarioRepositoryImpl implements ComentarioRepositoryQuery {
         List<Predicate> predicates = new ArrayList<>();
 
         if (!StringUtils.isEmpty(filter.getConteudoTexto())) {
-            predicates.add(builder.like(builder.lower(root.get("conteudo_texto")), "%" + filter.getConteudoTexto() + "%"));
+            predicates.add(builder.like(builder.lower(root.get("conteudoTexto")), "%" + filter.getConteudoTexto() + "%"));
         }
         if (filter.getDataPublicacao() != null) {
             predicates.add(builder.equal(root.get("dataPublicacao"), filter.getDataPublicacao()));
         }
         if (filter.getUpvotes() != null) {
-            predicates.add(builder.equal(root.get("dataUpvotes"), filter.getUpvotes()));
+            predicates.add(builder.equal(root.get("upvotes"), filter.getUpvotes()));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);

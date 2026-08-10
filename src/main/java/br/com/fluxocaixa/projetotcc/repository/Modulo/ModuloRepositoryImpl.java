@@ -30,8 +30,10 @@ public class ModuloRepositoryImpl implements ModuloRepositoryQuery{
 
         Root<Modulo> root = criteria.from(Modulo.class);
 
+        // ModuloDto só tem "titulo" no construtor (@AllArgsConstructor); passar "id" também
+        // fazia o JPA procurar um construtor ModuloDto(Long, String) que não existe e quebrar
+        // em runtime.
         criteria.select(builder.construct(ModuloDto.class,
-                root.get("id"),
                 root.get("titulo")
         ));
 

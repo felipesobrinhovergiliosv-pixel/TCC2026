@@ -3,16 +3,20 @@ package br.com.fluxocaixa.projetotcc.Controller;
 import br.com.fluxocaixa.projetotcc.dto.ComentarioDto;
 import br.com.fluxocaixa.projetotcc.model.Comentario;
 
+import br.com.fluxocaixa.projetotcc.model.User;
 import br.com.fluxocaixa.projetotcc.repository.Comentario.ComentarioRepositoryImpl;
 import br.com.fluxocaixa.projetotcc.repository.ComentarioRepository;
 import br.com.fluxocaixa.projetotcc.repository.Filter.ComentarioFilter;
 import br.com.fluxocaixa.projetotcc.service.ComentarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -41,18 +45,27 @@ public class ComentarioController {
     }
 
     @PostMapping
-    public Comentario adicionar(@RequestBody Comentario comentario) { return service.salvar(comentario); }
+    public Comentario adicionar(@RequestBody @Valid Comentario comentario, @AuthenticationPrincipal User usuarioLogado) {
+        comentario.setUser(usuarioLogado);
+        comentario.setUpvotes(0L);
+        comentario.setDataPublicacao(new Date());
+        return service.salvar(comentario);
+    }
 
     @DeleteMapping("/{comentarioId}")
-    public void remover(@PathVariable Long comentarioId){ service.excluir(comentarioId);}
+    public void remover(@PathVariable Long comentarioId, @AuthenticationPrincipal User usuarioLogado){
+        Comentario comentario = service.buscaroufalhar(comentarioId);
+        service.validarDono(comentario, usuarioLogado);
+        service.excluir(comentarioId);
+    }
 
     @PutMapping("/{comentarioId}")
-    public Comentario alterar(@PathVariable Long comentarioId, @RequestBody Comentario comentario){
+    public Comentario alterar(@PathVariable Long comentarioId, @RequestBody @Valid Comentario comentario, @AuthenticationPrincipal User usuarioLogado){
         Comentario comentarioAtual = service.buscaroufalhar(comentarioId);
+        service.validarDono(comentarioAtual, usuarioLogado);
 
-        BeanUtils.copyProperties(comentario, comentarioAtual, "id");
+        BeanUtils.copyProperties(comentario, comentarioAtual, "id", "user", "upvotes", "dataPublicacao");
         return service.salvar(comentarioAtual);
     }
 
 }
-

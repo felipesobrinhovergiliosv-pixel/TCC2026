@@ -1,6 +1,7 @@
 package br.com.fluxocaixa.projetotcc.config;
 
 import br.com.fluxocaixa.projetotcc.repository.UserRepository;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,19 +28,24 @@ public class SecurityFilter extends OncePerRequestFilter {
         var tokenJWT = recuperarToken(request);
 
         if (tokenJWT != null){
-            var email = tokenService.extrairEmailDoToken(tokenJWT);
-            var usuario = userRepository.findByEmail(email).get();
+            try {
+                var email = tokenService.extrairEmailDoToken(tokenJWT);
+                var usuario = userRepository.findByEmail(email).orElse(null);
 
-            var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                if (usuario != null) {
+                    var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+            } catch (JwtException ex) {
+                // Token inválido/expirado: segue sem autenticar, o endpoint protegido responde 403.
+            }
         }
 
         filterChain.doFilter(request, response);
     }
 
     private String recuperarToken(HttpServletRequest request) {
-        var authorizationHeader = request.getHeader("Autorization");
+        var authorizationHeader = request.getHeader("Authorization");
 
         if(authorizationHeader != null) {
             return authorizationHeader.replace("Bearer ", "");

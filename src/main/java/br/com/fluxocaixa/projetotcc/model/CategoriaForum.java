@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "categoriaforum")
+@Table(name = "categoria_forum")
 public class CategoriaForum {
 
     @Id

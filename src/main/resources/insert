@@ -1,3 +1,8 @@
+-- Dados de exemplo para desenvolvimento local. NÃO é uma migration do Flyway (não fica em
+-- db/migration, então nunca roda sozinho) — rode manualmente se precisar popular o banco.
+-- Senhas aqui estão em texto puro só pra teste manual; a aplicação real sempre grava com
+-- BCrypt (UserService), então esses usuários não conseguem logar via API até a senha
+-- ser recriptografada.
 
 INSERT INTO tipo_midia_enum (tipo) VALUES
 ('VIDEO'),
@@ -5,11 +10,11 @@ INSERT INTO tipo_midia_enum (tipo) VALUES
 ('AUDIO'),
 ('NENHUM');
 
--- USER
-INSERT INTO user (user, email, senha, xp_total, nvl) VALUES
-('joao123', 'joao@email.com', '123456', 100, 2),
-('maria_dev', 'maria@email.com', '123456', 250, 3),
-('carlos_game', 'carlos@email.com', '123456', 50, 1);
+-- USER (colunas alinhadas com V0001__Create_Database.sql)
+INSERT INTO user (user, email, senha, descr, plano, data_criacao) VALUES
+('joao123', 'joao@email.com', '123456', 'Aprendendo Java', 'GRATIS', NOW()),
+('maria_dev', 'maria@email.com', '123456', 'Dev em formação', 'PREMIUM', NOW()),
+('carlos_game', 'carlos@email.com', '123456', 'Curioso de POO', 'GRATIS', NOW());
 
 -- MODULO
 INSERT INTO modulo (titulo, ordem) VALUES
@@ -56,8 +61,14 @@ INSERT INTO post (categoria_id, user_id, titulo, conteudo_texto, midia_id, upvot
 (2, 2, 'Vamos discutir POO', 'Encapsulamento é importante', 2, 10),
 (3, 3, 'Novo curso lançado', 'Confira agora!', 4, 3);
 
--- COMENTARIO
+-- COMENTARIO (midia_id agora é opcional, ver V0003)
 INSERT INTO comentario (post_id, user_id, parent_id, conteudo_texto, midia_id, upvotes) VALUES
-(1, 2, NULL, 'JVM é a máquina virtual do Java', 4, 2),
-(1, 3, 1, 'Boa explicação!', 4, 1),
-(2, 1, NULL, 'Concordo totalmente', 3, 4);
+(1, 2, NULL, 'JVM é a máquina virtual do Java', NULL, 2),
+(1, 3, 1, 'Boa explicação!', NULL, 1),
+(2, 1, NULL, 'Concordo totalmente', NULL, 4);
+
+-- GAME (agora exige user_id, ver model/Game.java)
+INSERT INTO game (user_id, vidas, moedas, streak) VALUES
+(1, 5, 20, 3),
+(2, 3, 50, 7),
+(3, 5, 0, 0);

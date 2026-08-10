@@ -1,5 +1,6 @@
 package br.com.fluxocaixa.projetotcc.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -22,11 +23,13 @@ public class ProgressoUsuario {
     private Boolean concluido;
 
     @NotNull
-    private LocalDate data_conclusao;
+    @Column(name = "data_conclusao")
+    private LocalDate dataConclusao;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"email", "plano", "dataCriacao", "admin"})
     private User user;
 
     @NotNull

@@ -76,7 +76,7 @@ public class PostRepositoryImpl implements PostRepositoryQuery{
             predicates.add(builder.equal(root.get("data_publicacao"), filter.getData_publicacao()));
         }
         if (filter.getUpvotes() != null) {
-            predicates.add(builder.equal(root.get("Upvotes"), filter.getUpvotes()));
+            predicates.add(builder.equal(root.get("upvotes"), filter.getUpvotes()));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);

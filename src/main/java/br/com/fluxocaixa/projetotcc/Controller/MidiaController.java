@@ -5,6 +5,7 @@ import br.com.fluxocaixa.projetotcc.repository.Filter.MidiaFilter;
 import br.com.fluxocaixa.projetotcc.repository.Midia.MidiaRepositoryImpl;
 import br.com.fluxocaixa.projetotcc.repository.MidiaRepository;
 import br.com.fluxocaixa.projetotcc.service.MidiaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,13 +40,13 @@ public class MidiaController {
     }
 
     @PostMapping
-    public Midia adicionar(@RequestBody Midia midia) { return service.salvar(midia); }
+    public Midia adicionar(@RequestBody @Valid Midia midia) { return service.salvar(midia); }
 
     @DeleteMapping("/{midiaId}")
     public void remover(@PathVariable Long midiaId){ service.excluir(midiaId);}
 
     @PutMapping("/{midiaId}")
-    public Midia alterar(@PathVariable Long midiaId, @RequestBody Midia midia){
+    public Midia alterar(@PathVariable Long midiaId, @RequestBody @Valid Midia midia){
         Midia midiaAtual = service.buscaroufalhar(midiaId);
 
         BeanUtils.copyProperties(midia, midiaAtual, "id");

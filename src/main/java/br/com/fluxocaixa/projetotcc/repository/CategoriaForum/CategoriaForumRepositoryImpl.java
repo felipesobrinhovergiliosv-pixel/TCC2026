@@ -71,7 +71,7 @@ public class CategoriaForumRepositoryImpl implements CategoriaForumRepositoryQue
         List<Predicate> predicates = new ArrayList<>();
 
         if (!StringUtils.isEmpty(filter.getNome())){
-            predicates.add(builder.like(builder.lower(root.get("nomeCliente")), "%" + filter.getNome() + "%"));
+            predicates.add(builder.like(builder.lower(root.get("nome")), "%" + filter.getNome() + "%"));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);

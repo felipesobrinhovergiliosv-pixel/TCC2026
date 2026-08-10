@@ -1,6 +1,7 @@
 package br.com.fluxocaixa.projetotcc.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -46,6 +47,7 @@ public class Post {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"email", "plano", "dataCriacao", "admin"})
     private User user;
 
     @ManyToOne

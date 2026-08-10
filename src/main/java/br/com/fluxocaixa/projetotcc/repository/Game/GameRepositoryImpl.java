@@ -38,7 +38,7 @@ public class GameRepositoryImpl implements GameRepositoryQuery{
 
         Predicate[] predicates = criarRest(filter, builder, root);
         criteria.where(predicates);
-        criteria.orderBy(builder.asc(root.get("conteudoTexto")));
+        criteria.orderBy(builder.asc(root.get("id")));
 
         TypedQuery<GameDto> query = manager.createQuery(criteria);
         addRestPag(query,pageable);

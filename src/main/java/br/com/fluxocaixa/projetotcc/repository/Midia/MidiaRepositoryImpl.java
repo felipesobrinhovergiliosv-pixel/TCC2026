@@ -30,7 +30,7 @@ public class MidiaRepositoryImpl implements MidiaRepositoryQuery{
 
         criteria.select(builder.construct(MidiaDto.class,
                 root.get("nome"),
-                root.get("tipomidia")
+                root.get("tipoMidia")
         ));
 
         Predicate[] predicates = criarRest(filter, builder, root);
@@ -72,8 +72,8 @@ public class MidiaRepositoryImpl implements MidiaRepositoryQuery{
         if (!StringUtils.isEmpty(filter.getNome())) {
             predicates.add(builder.like(builder.lower(root.get("nome")), "%" + filter.getNome() + "%"));
         }
-        if (!StringUtils.isEmpty(String.valueOf(filter.getTipoMidia()))) {
-            predicates.add(builder.like(builder.lower(root.get("tipoMidia").get("id")), "%" + filter.getNome() + "%"));
+        if (filter.getTipoMidia() != null) {
+            predicates.add(builder.equal(root.get("tipoMidia"), filter.getTipoMidia()));
         }
 
         return predicates.toArray(new Predicate[predicates.size()]);

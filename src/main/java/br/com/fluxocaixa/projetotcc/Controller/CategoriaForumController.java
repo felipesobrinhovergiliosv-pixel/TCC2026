@@ -6,6 +6,7 @@ import br.com.fluxocaixa.projetotcc.repository.CategoriaForum.CategoriaForumRepo
 import br.com.fluxocaixa.projetotcc.repository.CategoriaForumRepository;
 import br.com.fluxocaixa.projetotcc.repository.Filter.CategoriaForumFilter;
 import br.com.fluxocaixa.projetotcc.service.CategoriaForumService;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,13 +41,13 @@ public class CategoriaForumController {
     }
 
     @PostMapping
-    public CategoriaForum adicionar(@RequestBody CategoriaForum categoriaForum) { return service.salvar(categoriaForum); }
+    public CategoriaForum adicionar(@RequestBody @Valid CategoriaForum categoriaForum) { return service.salvar(categoriaForum); }
 
     @DeleteMapping("/{categoriaForumId}")
     public void remover(@PathVariable Long categoriaForumId){ service.excluir(categoriaForumId);}
 
     @PutMapping("/{categoriaForumId}")
-    public CategoriaForum alterar(@PathVariable Long categoriaForumId, @RequestBody CategoriaForum categoriaForum){
+    public CategoriaForum alterar(@PathVariable Long categoriaForumId, @RequestBody @Valid CategoriaForum categoriaForum){
         CategoriaForum categoriaForumAtual = service.buscaroufalhar(categoriaForumId);
 
         BeanUtils.copyProperties(categoriaForum, categoriaForumAtual, "id");

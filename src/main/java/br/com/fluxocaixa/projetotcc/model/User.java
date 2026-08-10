@@ -48,9 +48,17 @@ public class User implements UserDetails {
     @Column(name = "data_criacao")
     private Date dataCriacao;
 
+    // Libera endpoints administrativos (modulo, licao, midia, categoriaForum). Só pode ser
+    // alterado diretamente no banco por enquanto — não existe endpoint público pra promover.
+    @Column(name = "admin")
+    private Boolean admin = false;
+
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (Boolean.TRUE.equals(admin)) {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
