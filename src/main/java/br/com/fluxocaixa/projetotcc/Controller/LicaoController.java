@@ -56,10 +56,8 @@ public class LicaoController {
     }
 
     @PostMapping("/{licaoId}/responder")
-    public LicaoRespostaResultadoDto responder(@PathVariable Long licaoId, @RequestBody @Valid LicaoRespostaDto dados){
-        boolean correta = service.respostaCorreta(licaoId, dados.resposta());
-        Licao licao = service.buscaroufalhar(licaoId);
-        return new LicaoRespostaResultadoDto(correta, correta ? licao.getXp_recompensa() : 0);
+    public LicaoRespostaResultadoDto responder(@PathVariable Long licaoId, @RequestBody @Valid LicaoRespostaDto dados, @AuthenticationPrincipal User usuarioLogado){
+        return service.responder(licaoId, dados.resposta(), usuarioLogado);
     }
 
     @PostMapping

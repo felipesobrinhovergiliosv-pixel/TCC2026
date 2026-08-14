@@ -1,7 +1,12 @@
 package br.com.fluxocaixa.projetotcc.service;
 
+import br.com.fluxocaixa.projetotcc.dto.LicaoRespostaResultadoDto;
+import br.com.fluxocaixa.projetotcc.model.Game;
 import br.com.fluxocaixa.projetotcc.model.Licao;
+import br.com.fluxocaixa.projetotcc.model.ProgressoUsuario;
+import br.com.fluxocaixa.projetotcc.model.User;
 import br.com.fluxocaixa.projetotcc.repository.LicaoRepository;
+import br.com.fluxocaixa.projetotcc.repository.ProgressoUsuarioRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -10,11 +15,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 @Service
 public class LicaoService {
 
     @Autowired
     private LicaoRepository licaoRepository;
+
+    @Autowired
+    private ProgressoUsuarioRepository progressoUsuarioRepository;
+
+    @Autowired
+    private GameService gameService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -51,5 +64,38 @@ public class LicaoService {
         } catch (Exception e) {
             throw new IllegalStateException("Conteúdo da lição em formato inválido.", e);
         }
+    }
+
+    @Transactional
+    public LicaoRespostaResultadoDto responder(Long licaoId, String respostaEnviada, User usuarioLogado) {
+        boolean correta = respostaCorreta(licaoId, respostaEnviada);
+        Licao licao = buscaroufalhar(licaoId);
+
+        ProgressoUsuario progresso = progressoUsuarioRepository
+                .findByUserIdAndLicaoId(usuarioLogado.getId(), licaoId)
+                .orElseGet(() -> {
+                    ProgressoUsuario novo = new ProgressoUsuario();
+                    novo.setUser(usuarioLogado);
+                    novo.setLicao(licao);
+                    return novo;
+                });
+
+        // Responder uma lição já concluída de novo não pode creditar XP outra vez —
+        // sem essa checagem, reabrir uma lição feita e acertar de novo rendia moedas
+        // infinitas.
+        boolean jaConcluida = Boolean.TRUE.equals(progresso.getConcluido());
+        int xp = (correta && !jaConcluida) ? licao.getXp_recompensa() : 0;
+
+        if (correta && !jaConcluida) {
+            Game game = gameService.buscarOuCriarDoUsuario(usuarioLogado);
+            game.setMoedas(game.getMoedas() + xp);
+            gameService.salvar(game);
+
+            progresso.setConcluido(true);
+            progresso.setDataConclusao(LocalDate.now());
+            progressoUsuarioRepository.save(progresso);
+        }
+
+        return new LicaoRespostaResultadoDto(correta, xp);
     }
 }

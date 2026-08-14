@@ -6,8 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
@@ -35,6 +39,19 @@ public class ApiExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErroResposta> handleDataIntegrity(DataIntegrityViolationException ex){
         ErroResposta erro = new ErroResposta("Dados inválidos ou já cadastrados.", HttpStatus.BAD_REQUEST.value());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+    }
+
+    // Campo obrigatório em branco, tamanho inválido etc. (@Valid no corpo da requisição).
+    // Sem esse handler, MethodArgumentNotValidException (que NÃO é RuntimeException) caía no
+    // handler genérico de Exception e voltava 500 pro cliente por um erro de validação normal.
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErroResposta> handleValidacao(MethodArgumentNotValidException ex){
+        String mensagem = ex.getBindingResult().getFieldErrors().stream()
+                .map(erro -> erro.getField() + ": " + erro.getDefaultMessage())
+                .collect(Collectors.joining("; "));
+        if (mensagem.isBlank()) mensagem = "Dados inválidos.";
+        ErroResposta erro = new ErroResposta(mensagem, HttpStatus.BAD_REQUEST.value());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
     }
 

@@ -25,6 +25,18 @@ public class GameService {
     }
 
     @Transactional
+    public Game buscarOuCriarDoUsuario(User usuario){
+        return repository.findByUserId(usuario.getId()).orElseGet(() -> {
+            Game game = new Game();
+            game.setUser(usuario);
+            game.setVidas(5);
+            game.setMoedas(0);
+            game.setStreak(0);
+            return repository.save(game);
+        });
+    }
+
+    @Transactional
     public void excluir(Long gameId){ repository.deleteById((gameId));}
 
     // Só o dono do progresso de jogo (ou um admin) pode editar/apagar.

@@ -1,5 +1,7 @@
 package br.com.fluxocaixa.projetotcc.Controller;
 
+import br.com.fluxocaixa.projetotcc.dto.PostCriacaoDto;
+import br.com.fluxocaixa.projetotcc.dto.PostCurtidaResultadoDto;
 import br.com.fluxocaixa.projetotcc.dto.PostDto;
 import br.com.fluxocaixa.projetotcc.model.Post;
 import br.com.fluxocaixa.projetotcc.model.User;
@@ -36,17 +38,31 @@ public class PostController {
         return repository.filtrar(postFilter, pageable);
     }
 
+    @GetMapping("/curtidos")
+    public List<Long> curtidos(@AuthenticationPrincipal User usuarioLogado){
+        return service.postsCurtidosPeloUsuario(usuarioLogado);
+    }
+
     @GetMapping("/{postId}")
     public Post buscar(@PathVariable Long postId ){
         return service.buscaroufalhar(postId);
     }
 
     @PostMapping
-    public Post adicionar(@RequestBody @Valid Post post, @AuthenticationPrincipal User usuarioLogado) {
-        post.setUser(usuarioLogado); // autor é sempre quem está logado, não o que vier no corpo
+    public Post adicionar(@RequestBody @Valid PostCriacaoDto dados, @AuthenticationPrincipal User usuarioLogado) {
+        Post post = new Post();
+        post.setTitulo(dados.titulo());
+        post.setConteudo_texto(dados.conteudo_texto());
+        post.setCategoriaForum(dados.categoriaForum());
+        post.setUser(usuarioLogado);
         post.setUpvotes(0);
         post.setData_publicacao(LocalDate.now());
         return service.salvar(post);
+    }
+
+    @PostMapping("/{postId}/curtir")
+    public PostCurtidaResultadoDto curtir(@PathVariable Long postId, @AuthenticationPrincipal User usuarioLogado){
+        return service.curtir(postId, usuarioLogado);
     }
 
     @DeleteMapping("/{postId}")

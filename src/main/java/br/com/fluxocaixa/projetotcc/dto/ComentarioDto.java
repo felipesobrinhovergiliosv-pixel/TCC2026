@@ -19,5 +19,5 @@ public class ComentarioDto {
     @Column(name = "data_publicacao")
     private Date dataPublicacao;
 
-    private Long upvotes;
+    private Integer upvotes;
 }

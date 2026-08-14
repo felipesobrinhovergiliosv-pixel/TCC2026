@@ -1,5 +1,6 @@
 package br.com.fluxocaixa.projetotcc.Controller;
 
+import br.com.fluxocaixa.projetotcc.dto.ComentarioCriacaoDto;
 import br.com.fluxocaixa.projetotcc.dto.ComentarioDto;
 import br.com.fluxocaixa.projetotcc.model.Comentario;
 
@@ -39,15 +40,23 @@ public class ComentarioController {
         return repository.filtrar(comentarioFilter, pageable);
     }
 
+    @GetMapping("/porPost/{postId}")
+    public List<Comentario> listarPorPost(@PathVariable Long postId){
+        return repository.findByPostId(postId);
+    }
+
     @GetMapping("/{comentarioId}")
     public Comentario buscar(@PathVariable Long comentarioId ){
         return service.buscaroufalhar(comentarioId);
     }
 
     @PostMapping
-    public Comentario adicionar(@RequestBody @Valid Comentario comentario, @AuthenticationPrincipal User usuarioLogado) {
+    public Comentario adicionar(@RequestBody @Valid ComentarioCriacaoDto dados, @AuthenticationPrincipal User usuarioLogado) {
+        Comentario comentario = new Comentario();
+        comentario.setPost(dados.post());
+        comentario.setConteudoTexto(dados.conteudoTexto());
         comentario.setUser(usuarioLogado);
-        comentario.setUpvotes(0L);
+        comentario.setUpvotes(0);
         comentario.setDataPublicacao(new Date());
         return service.salvar(comentario);
     }

@@ -37,6 +37,11 @@ public class ProgressoUsuarioController {
         return repository.filtrar(progressoUsuarioFilter, pageable);
     }
 
+    @GetMapping("/meu")
+    public List<ProgressoUsuario> meuProgresso(@AuthenticationPrincipal User usuarioLogado){
+        return repository.findByUserId(usuarioLogado.getId());
+    }
+
     @GetMapping("/{progressoUsuarioId}")
     public ProgressoUsuario buscar(@PathVariable Long progressoUsuarioId, @AuthenticationPrincipal User usuarioLogado){
         ProgressoUsuario progresso = service.buscaroufalhar(progressoUsuarioId);

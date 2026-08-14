@@ -36,6 +36,11 @@ public class GameController {
         return repository.filtrar(filter, pageable);
     }
 
+    @GetMapping("/meu")
+    public Game meuGame(@AuthenticationPrincipal User usuarioLogado){
+        return service.buscarOuCriarDoUsuario(usuarioLogado);
+    }
+
     @GetMapping("/{gameId}")
     public Game buscar(@PathVariable Long gameId, @AuthenticationPrincipal User usuarioLogado){
         Game game = service.BouF(gameId);

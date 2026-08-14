@@ -41,6 +41,11 @@ public class UserController {
         return repository.filtrar(userFilter, pageable);
     }
 
+    @GetMapping("/me")
+    public User buscarLogado(@AuthenticationPrincipal User usuarioLogado){
+        return usuarioLogado;
+    }
+
     @GetMapping("/{userId}")
     public ResponseEntity<Object> buscar(@PathVariable Long userId, @AuthenticationPrincipal User usuarioLogado){
         User usuario = service.buscaroufalhar(userId);

@@ -53,6 +53,18 @@ public class User implements UserDetails {
     @Column(name = "admin")
     private Boolean admin = false;
 
+    private String telefone;
+
+    private String foto;
+
+    private String empresa;
+
+    private String cnpj;
+
+    private String ramo;
+
+    private String instagram;
+
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -62,6 +74,7 @@ public class User implements UserDetails {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() { return senha; }
 

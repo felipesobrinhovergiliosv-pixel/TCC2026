@@ -47,7 +47,7 @@ public class Comentario {
 
 
     @PositiveOrZero
-    private Long upvotes;
+    private Integer upvotes;
 
     @Column(name = "data_publicacao")
     private Date dataPublicacao;
